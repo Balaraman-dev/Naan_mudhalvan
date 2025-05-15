@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Fetch = () => {
+const Products = () => {
     const [data, setData] = useState([]);
     const [count,setCount]=useState(1);
 
@@ -26,16 +26,8 @@ const Fetch = () => {
 
     return (
         <div className='w-full flex items-center justify-center flex-col'>
-            {!data.length && <h1 className='w-full h-full flex text-center ml-40 text-green-500'>Loading......</h1>}
-            <div className='w-full flex justify-between h-20 m-10 items-center bg-slate-500 text-white '>
-                <h2 className='font-bold text-3xl pl-20'>Vanga Nanbare !</h2>
-                <div className='flex gap-15 pr-20'>
-                <h3 className='font-semibold text-xl'>Home</h3>
-                <h3 className='font-semibold text-xl'>Cart</h3>
-                <h3 className='font-semibold text-xl'>Profile</h3>
-                </div>
-            </div>
-            <h2 className='w-full text-gray-500 text-3xl font-semibold pl-12'>Products :</h2>
+            <h2 className='w-full text-gray-500 text-3xl font-semibold pl-12 mt-4'>Products :</h2>
+            {!data.length && <h1 className='w-full h-full flex text-center text-3xl mt-16 ml-40 text-red-500'>Loading...</h1>}
             <div className=' grid grid-cols-4 gap-4 p-5 '>
                 {data.map((val) => (
                     <div key={val.id} className='w-full h-100px rounded-lg p-4 hover:scale-105 duration-400'>
@@ -63,4 +55,4 @@ const Fetch = () => {
     );
 }
 
-export default Fetch;
+export default Products;
