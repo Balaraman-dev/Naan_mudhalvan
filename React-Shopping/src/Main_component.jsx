@@ -10,8 +10,13 @@ import Cart from './components/Cart.jsx'
 
 
 const Main_component = () => {
+  
+  const [cart,setCart]=useState();
+
   return (
-    <BrowserRouter>
+    <div className="w-full bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
+
+    <BrowserRouter >
         <Nav/>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
@@ -23,6 +28,7 @@ const Main_component = () => {
 
         </Routes>
     </BrowserRouter>
+    </div>
   )
 }
 
