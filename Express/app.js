@@ -1,14 +1,32 @@
-import express from "express";
-const app=express();
-const PORT=5000;
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import User from './models/userModel.js'; // your model path
 
-app.get("/",(req,res)=>{
-    res.send("helloo express");
-})
+dotenv.config();
+const app = express();
+app.use(express.json());
 
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log("MongoDB Connected"))
+  .catch(err => console.error("MongoDB Connection Failed:", err.message));
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// POST endpoint
+app.post('/api/register', async (req, res) => {
+  try {
+    const { name, email, password_hash } = req.body;
+    const user = new User({ name, email, password_hash });
+    await user.save();
+    res.status(201).json({ message: 'User created successfully!' });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-export default app;
+// Start server
+app.listen(5000, () => {
+  console.log('Server running on port 5000');
+});
